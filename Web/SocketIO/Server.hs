@@ -21,6 +21,9 @@ import              Network.HTTP.Types              (Status, status200, status40
 import              Network.HTTP.Types.Header       (ResponseHeaders)
 import qualified    Network.Wai                     as Wai
 import qualified    Network.Wai.Handler.Warp        as Warp
+import qualified    Network.Wai.Handler.WebSockets  as WaiWS
+import qualified    Network.WebSockets              as WS
+--import qualified    Network.WebSockets.Connection   as WS
 
 --------------------------------------------------------------------------------
 -- | Run a socket.io application, build on top of Warp.
@@ -45,8 +48,16 @@ serverConfig port config handler = do
     let vorspann = header config
     let env = Env tableRef handler config logChannel globalChannel
 
+    let httpMode = httpApp vorspann $ runConnection env
+    let wsMode = wsApp vorspann $ runConnection env
+
+    let opts = WS.defaultConnectionOptions
+
     -- run it with Warp
-    Warp.run port (httpApp vorspann (runConnection env))
+    Warp.run port $ WaiWS.websocketsOr opts wsMode httpMode
+
+wsApp :: ResponseHeaders -> (Request -> IO Message) -> WS.ServerApp
+wsApp = undefined
 
 --------------------------------------------------------------------------------
 -- | Wrapped as a HTTP app

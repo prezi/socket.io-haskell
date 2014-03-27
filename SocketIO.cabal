@@ -74,8 +74,10 @@ library
                     , ansi-terminal         ==0.6.*
                     , unordered-containers  ==0.2.*
                     , random                ==1.0.*
-                    , wai                   ==2.0.*
-                    , warp                  ==2.0.*
+                    , wai                   ==2.1.*
+                    , wai-websockets        ==2.1.*
+                    , warp                  ==2.1.*
+                    , websockets            ==0.8.*
                     , http-types            ==0.8.*
                     , mtl                   ==2.1.*
                     , transformers-base     ==0.4.*
@@ -104,8 +106,10 @@ test-suite socketio-test
                     , ansi-terminal         ==0.6.*
                     , unordered-containers  ==0.2.*
                     , random                ==1.0.*
-                    , wai                   ==2.0.*
-                    , warp                  ==2.0.*
+                    , wai                   ==2.1.*
+                    , wai-websockets        ==2.1.*
+                    , warp                  ==2.1.*
+                    , websockets            ==0.8.*
                     , http-types            ==0.8.*
                     , mtl                   ==2.1.*
                     , transformers-base     ==0.4.*
